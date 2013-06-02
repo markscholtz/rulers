@@ -11,6 +11,12 @@ module Rulers
       @env
     end
 
+    def controller_name
+      klass = self.class
+      klass = klass.to_s.gsub(/Controller$/, "")
+      Rulers.to_underscore klass
+    end
+
     def render(view_name, locals = {})
       filename = File.join $APPLICATION_ROOT, "app", "views", controller_name, "#{view_name}.html.erb"
       template = File.read(filename)
@@ -19,12 +25,6 @@ module Rulers
                                 :controller_name => controller_name,
                                 :application_root => $APPLICATION_ROOT)
 
-    end
-
-    def controller_name
-      klass = self.class
-      klass = klass.to_s.gsub(/Controller$/, "")
-      Rulers.to_underscore klass
     end
   end
 end

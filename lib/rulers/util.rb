@@ -8,7 +8,7 @@ module Rulers
       downcase
   end
 
-  def paths(prefix)
+  def self.paths(prefix)
     puts $LOAD_PATH.count
     puts prefix
     $LOAD_PATH.each do |p|
