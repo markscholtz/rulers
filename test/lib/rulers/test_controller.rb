@@ -34,7 +34,19 @@ EOS
   end
 
   def test_controller_instance_variable_passing
-    assert true == false
+    $APPLICATION_ROOT = File.expand_path("controller_test_path", File.dirname(__FILE__)) # Store this in some sort of config object in Rulers eventually
+
+    controller = TestController.new({})
+    controller.instance_variable_set :@test, "joke"
+    result = controller.render("test", name: "Joanne")
+    expected =<<EOS
+<p>
+  Hello Joanne!
+  Is this a joke?
+</p>
+
+EOS
+    assert result == expected, "Expected: #{expected}, Got #{result}"
   end
 end
 
