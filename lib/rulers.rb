@@ -1,4 +1,5 @@
 require "rulers/array"
+require "rulers/controllers"
 require "rulers/dependencies"
 require "rulers/routing"
 require "rulers/util"
@@ -8,13 +9,11 @@ module Rulers
   class Application
 
     def call(env)
-      puts "----> #{env["PATH_INFO"]}"
-
       if env["PATH_INFO"] == "/"
         # env["PATH_INFO"] = "/quotes/a_quote"
 
-        # index = File.read("public/index.html")
-        # return [200, {"Content-Type" => "text/html"}, [index]]
+        index = File.read(File.join($APPLICATION_ROOT, "public", "index.html"))
+        return [200, {"Content-Type" => "text/html"}, [index]]
 
         # begin
         #   home = HomeController.new(env)
@@ -24,7 +23,7 @@ module Rulers
         #   raise e
         # end
 
-        return [307, {"Content-Type" => "text/html"}, ["Redirect!"]]
+        # return [307, {"Content-Type" => "text/html"}, ["Redirect!"]]
       elsif env["PATH_INFO"] == "/favicon.ico"
         return [404, {"Content-Type" => "text/html"}, []]
       end
@@ -40,16 +39,6 @@ module Rulers
       end
 
       [200, {"Content-Type" => "text/html"}, [text]]
-    end
-  end
-
-  class Controller
-    def initialize(env)
-      @env = env
-    end
-
-    def env
-      @env
     end
   end
 end
