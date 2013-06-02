@@ -15,7 +15,10 @@ module Rulers
       filename = File.join $APPLICATION_ROOT, "app", "views", controller_name, "#{view_name}.html.erb"
       template = File.read(filename)
       eruby = Erubis::Eruby.new(template)
-      eruby.result locals.merge(:env => env)
+      eruby.result locals.merge(:env => env,
+                                :controller_name => controller_name,
+                                :application_root => $APPLICATION_ROOT)
+
     end
 
     def controller_name
