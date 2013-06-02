@@ -1,5 +1,5 @@
 require "rulers/array"
-require "rulers/controllers"
+require "rulers/controller"
 require "rulers/dependencies"
 require "rulers/routing"
 require "rulers/util"
