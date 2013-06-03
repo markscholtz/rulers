@@ -4,7 +4,9 @@ class RulersAppTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
-    TestApp::Application.new
+    test_app = TestApp::Application.new
+    test_app.application_root = File.join(File.dirname(__FILE__), "test_app")
+    test_app
   end
 
   def test_root_request_returns_public_index_by_default

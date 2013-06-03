@@ -9,3 +9,5 @@ require "pry"
 require "rulers"
 require_relative "test_app/config/application"
 
+$TEST_ROOT = File.expand_path(File.dirname(__FILE__))
+

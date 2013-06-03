@@ -3,12 +3,17 @@ require "erubis"
 module Rulers
   class Controller
 
-    def initialize(env)
+    def initialize(env, root = "")
       @env = env
+      @root = root
     end
 
     def env
       @env
+    end
+
+    def root_path
+      @root
     end
 
     def controller_name
@@ -18,7 +23,7 @@ module Rulers
     end
 
     def render(view_name, locals = {})
-      filename = File.join $APPLICATION_ROOT, "app", "views", controller_name, "#{view_name}.html.erb"
+      filename = File.join(@root, "app", "views", controller_name, "#{view_name}.html.erb")
       template = File.read(filename)
       eruby = Erubis::Eruby.new(template)
 
@@ -30,7 +35,7 @@ module Rulers
 
       eruby.result locals.merge(:env => env,
                                 :controller_name => controller_name,
-                                :application_root => $APPLICATION_ROOT)
+                                :application_root => @root)
     end
   end
 end

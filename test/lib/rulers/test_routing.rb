@@ -1,6 +1,12 @@
 require_relative "../../test_helper"
 
-class TestController < Rulers::Controller
+# Wrap this class in a module.
+# If loaded first it will cause the test_app's TestController to not load
+# causing strange test bugs when run with Rake test"to not load causing strange
+# test bugs when run with "Rake test"
+module EmptyController
+  class TestController < Rulers::Controller
+  end
 end
 
 class RoutingTest < Test::Unit::TestCase

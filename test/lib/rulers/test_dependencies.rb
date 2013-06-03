@@ -14,8 +14,7 @@ class DependenciesTest < Test::Unit::TestCase
       Object.const_get("DependenciesController")
     end
 
-    root = File.expand_path("..", File.dirname(__FILE__))
-    $LOAD_PATH << File.join(root, "test", "dependencies_test_path")
+    $LOAD_PATH << File.join($TEST_ROOT, "dependencies_test_path")
 
     result = Object.const_get("DependenciesController")
     assert result == DependenciesController
